@@ -11,21 +11,21 @@ import os,sys,datetime
 
 
 ####服务启动的主机名,端口号,DEBUG模式开关
-HOST_NAME = "192.168.3.124"
+HOST_NAME = "192.168.1.141"
 HOST_PORT = "5000"
 HOST_DEBUG_MODE = True
 
 ##远程服务的域名
 ENV_DOMAINNAME ="http://bigerqa.ccx123.com/"     ##QA环境的
 
-###启动加载目录配置
-template_dir="E:\\gitlab204\\Smoke_Test\\smoketest\\templates"    #临时目录
-static_dir="E:\\gitlab204\\Smoke_Test\\smoketest\\static"         #项目静态资源目录
+###启动加载目录配置D:\\Coding\\qaplatform
+template_dir="D:\\Coding\\qaplatform\\templates"    #临时目录
+static_dir="D:\\Coding\\qaplatform\\static"         #项目静态资源目录
 
 ####LOG 配置
 LOG_LEVEL="DEBUG"
 OBJ_LOGGER="[smoke test]"
-FILE_LOGGER="E:\\gitlab204\\Smoke_Test\\temp\\smoketest.log"
+FILE_LOGGER="D:\\Coding\\log\\smoketest.log"
 
 ###临时结果集
 temp_result={}
