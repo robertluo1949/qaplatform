@@ -11,13 +11,13 @@ HOST_DEBUG_MODE = True
 ENV_DOMAINNAME ="http://bigerqa.ccx123.com/"     ##QA环境的
 
 ###启动加载目录配置
-template_dir="/data/Qatest_Smoke/smoketest/templates"    #模板目录
-static_dir="/data/Qatest_Smoke/smoketest/static"         #项目静态资源目录
+template_dir="/data/Qatest_Smoke/qaplatform/templates"    #模板目录
+static_dir="/data/Qatest_Smoke/qaplatform/static"         #项目静态资源目录
 
 ####LOG 配置
 LOG_LEVEL="DEBUG"
 OBJ_LOGGER="[smoke test]"
-FILE_LOGGER="/data/logs/smoketest.log"
+FILE_LOGGER="/data/logs/qaplatform.log"
 
 
 ####报告配置_smoke

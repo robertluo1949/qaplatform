@@ -13,10 +13,10 @@ from flask import render_template
 import config
 import os,sys,json
 import importlib
-from smoketest.controller.libs.email import sendemail
-from smoketest.controller.libs.htmlreport.HTMLTestReportCN import HTMLTestRunner
-from smoketest.controller.log import logger
-from smoketest.testmodel.bigerSmokeTest import modelSuite
+from qaplatform.controller.libs.email import sendemail
+from qaplatform.controller.libs.htmlreport.HTMLTestReportCN import HTMLTestRunner
+from qaplatform.controller.log import logger
+from qaplatform.testmodel.bigerSmokeTest import modelSuite
 
 
 app = Flask(__name__,static_folder=config.static_dir,template_folder=config.template_dir)
@@ -42,7 +42,7 @@ testre ="shuibo.luo@ucextech.com,240505723@qq.com"
 # </html>
 # '''
 
-@app.route('/index')
+@app.route('/index.html')
 
 def indextmp():
     logger.logger.info("testing logger")

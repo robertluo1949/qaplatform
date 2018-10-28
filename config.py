@@ -19,13 +19,13 @@ HOST_DEBUG_MODE = True
 ENV_DOMAINNAME ="http://bigerqa.ccx123.com/"     ##QA环境的
 
 ###启动加载目录配置D:\\Coding\\qaplatform
-template_dir="D:\\Coding\\qaplatform\\templates"    #临时目录
-static_dir="D:\\Coding\\qaplatform\\static"         #项目静态资源目录
+template_dir="D:\\Coding\\qaplatform\\qaplatform\\templates"    #临时目录
+static_dir="D:\\Coding\\qaplatform\\qaplatform\\static"         #项目静态资源目录
 
 ####LOG 配置
 LOG_LEVEL="DEBUG"
 OBJ_LOGGER="[smoke test]"
-FILE_LOGGER="D:\\Coding\\log\\smoketest.log"
+FILE_LOGGER="D:\\Coding\\log\\qaplatform.log"
 
 ###临时结果集
 temp_result={}
@@ -44,7 +44,7 @@ REPORT_INFO ={
         },
     1:{
         "type_id": "01",  ##XXX类型编号
-        "re_dir": "E:\\PycharmProjects\\smoketest\\reports\\",  ##报告存放目录
+        "re_dir": "E:\\PycharmProjects\\qaplatform\\reports\\",  ##报告存放目录
         "re_name": "smoke_test_" + str(datetime.datetime.now().strftime("%Y%m%d%H%M%S")) + ".html",  ##报告名称
         "re_title": "smoke test",  ##报告标题
         "re_description": "smoke test",  ##报告描述

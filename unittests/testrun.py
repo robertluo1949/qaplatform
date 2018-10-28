@@ -9,9 +9,9 @@ other:
 '''
 
 
-from smoketest.controller.log import logger
-from smoketest.controller.libs.htmlreport.HTMLTestReportCN import HTMLTestRunner
-from smoketest.testmodel.bigerSmokeTest import modelSuite
+from qaplatform.controller.log import logger
+from qaplatform.controller.libs.htmlreport.HTMLTestReportCN import HTMLTestRunner
+from qaplatform.testmodel.bigerSmokeTest import modelSuite
 
 
 
