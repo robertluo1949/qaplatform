@@ -99,4 +99,10 @@ def testsmoke():
 
 
 if __name__=='__main__':
-    app.run(host=config.HOST_NAME, port=config.HOST_PORT, debug=config.HOST_DEBUG_MODE,load_dotenv=True)
+    try:
+        app.run(host=config.HOST_NAME, port=config.HOST_PORT, debug=config.HOST_DEBUG_MODE,load_dotenv=True)
+        logger.logger.info("服务器启动成功")
+    except Exception as e:
+        logger.logger.error("服务器启动失败")
+        print(e)
+        logger.logger.error(str(e))

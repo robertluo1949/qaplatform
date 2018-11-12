@@ -6,7 +6,7 @@ smoke Test             <br>
 
 
 **项目结构介绍**   <br>
-1  smoketest  : 项目测试案例目录 <br>
+1  qaplatform  : 项目测试案例目录 <br>
  ------------------controller : 控制器和引用libs <br>
  ------------------static : flask 基础包 静态资源 <br>
  ------------------templates : flask 基础包 模板 <br>
