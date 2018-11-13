@@ -11,7 +11,7 @@ wb = Workbook(PATH+"workbook_write.xlsx")
 ws_1 =wb.add_worksheet("firstsheet")
 ws_2 =wb.add_worksheet("secondsheet")
 
-data = numpy.arange(1,65).reshape(8,8)
+data = numpy.arange(1,82).reshape(9,9)
 
 for c in range(data.shape[0]):
 
