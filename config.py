@@ -38,9 +38,9 @@ REPORT_INFO ={
     0:{
         "type_id":"01",                                ##类型编号
         "re_dir":RUN_HOME_PATH+"tmp\\reports\\",       ##报告存放目录
-        "re_name":"smoke_test_"+str(datetime.datetime.now().strftime("%Y%m%d%H%M%S"))+".html",  ##报告名称
-        "re_title" : "smoke test",            ##报告标题
-        "re_description" : "smoke test",      ##报告描述
+        "re_name":"example_test_"+str(datetime.datetime.now().strftime("%Y%m%d%H%M%S"))+".html",  ##报告名称
+        "re_title" : "example test",            ##报告标题
+        "re_description" : "example test",      ##报告描述
         "re_author" : "Robert"                ##作者
         },
     1:{

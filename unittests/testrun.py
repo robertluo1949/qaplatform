@@ -11,7 +11,7 @@ other:
 
 from qaplatform.controller.log import logger
 from qaplatform.controller.libs.htmlreport.HTMLTestReportCN import HTMLTestRunner
-from qaplatform.testmodel.bigerSmokeTest import modelSuite
+from qaplatform.testmodel.bigerSmokeTest import SmokeModelSuite
 
 
 
@@ -36,7 +36,7 @@ if __name__ == '__main__':
         )
 
 
-        modol = modelSuite()
+        modol = SmokeModelSuite()
         testsuite = modol.SuiteMulti()
         runner.run(testsuite)
         # 关闭文件，否则会无法生成文件

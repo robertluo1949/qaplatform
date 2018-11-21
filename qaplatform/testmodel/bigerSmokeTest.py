@@ -22,9 +22,9 @@ from qaplatform.testcases.homepage_102 import test_all_coins,\
 
 
 
-class modelSuite(unittest.TestSuite):
+class SmokeModelSuite(unittest.TestSuite):
     '''
-    组织ucex测试模型
+    组织ucex smoke测试模型
     '''
 
     def SuiteMulti(self):
@@ -75,8 +75,6 @@ class modelSuite(unittest.TestSuite):
         suitTest.addTests(unittest.makeSuite(test_c2c_user_cancle_trade.C2C_cancle_trade))
         # suitTest.addTests(unittest.makeSuite(test_c2c_user_confirmpaied_trade.C2C_confirm_trade))
         suitTest.addTests(unittest.makeSuite(test_c2c_user_create_trade.C2C_create_trade))
-
-
 
 
         suitTest.addTests(unittest.makeSuite(test_orderceate.ExchangeOrder))         ####UCEX  PC的exchange 104币币交易接口
