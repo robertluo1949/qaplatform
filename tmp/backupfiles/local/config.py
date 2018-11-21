@@ -25,7 +25,7 @@ static_dir="E:\\PycharmProjects\\qaplatform\\static"         #项目静态资源
 ####LOG 配置
 LOG_LEVEL="DEBUG"
 OBJ_LOGGER="[smoke test]"
-FILE_LOGGER="E:\\PycharmProjects\\qaplatform\\temp\\qaplatform.log"
+FILE_LOGGER="E:\\PycharmProjects\\qaplatform\\tmp\\qaplatform.log"
 
 
 ####报告配置  [0,1,2]  (0 : 冒烟测试 1 )
