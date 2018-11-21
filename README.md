@@ -27,6 +27,6 @@ smoke test 用例清单:  http://confluence.ucex.corp/pages/viewpage.action?page
 新手指导:    <br>
 1     安装pycharm professional 并授权密钥   <br>
 2     配置运行环境  python virtual machine  <br>
-3     git clone 代码 https://github.com/robertluo1949/qaplatform.git  <br>
+3     git clone 代码 https://github.com/robertluo1949/qaplatform.git <br>
 4     到 smoketest指定模块目录下增加  data文件   <br>
 5     编号规则[总共7位数]  前面3位是模块编号  后面4位是测试用例编号,从 101 开始 到 9999 结束. <br>  
