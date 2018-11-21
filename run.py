@@ -21,8 +21,6 @@ from qaplatform.testmodel.bigerSmokeTest import modelSuite
 
 app = Flask(__name__,static_folder=config.static_dir,template_folder=config.template_dir)
 
-
-testre ="shuibo.luo@ucextech.com,240505723@qq.com"
 @app.route('/')
 
 
@@ -78,7 +76,6 @@ def testsmoke():
     result_json = {"Report  dir": filePath,
                    "Report  url": str(config.HOST_NAME+"/"+config.REPORT_INFO[0]["re_name"])}
 
-    print(fp)
 
     try:
         sendemail.sendemailSMTP(
@@ -104,5 +101,4 @@ if __name__=='__main__':
         logger.logger.info("服务器启动成功")
     except Exception as e:
         logger.logger.error("服务器启动失败")
-        print(e)
         logger.logger.error(str(e))
