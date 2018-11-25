@@ -1,7 +1,8 @@
 from xlrd import open_workbook
 
 PATH = "D:\\PyCharm\\bigdata\\"
-book = open_workbook(PATH+"workbook_read_xlrd.xls")
+# book = open_workbook(PATH+"workbook_read_xlrd.xls")
+book = open_workbook(PATH+"workbook_read_xlrd.csv")
 
 print(book.sheet_names())
 

@@ -3,7 +3,7 @@
 title: 自动化测试 UCEX 测试请求和响应数据
 author:Robert
 date:20180504
-email:shuibo.luo@ucextech.com
+email:robert_luo1949@163.com
 content:  java user-userlogin_101
 other:
 """

@@ -1,0 +1,2957 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>smoke test</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.2"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 80%; }
+table       { font-size: 100%; }
+
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="收起"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="详细"
+		}
+	}
+}
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
+        }
+    }
+}
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1 style="font-family: Microsoft YaHei">smoke test</h1>
+<p class='attribute'><strong>测试人员 : </strong> Robert</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-11-21 13:09:50</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:08.901508</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 101，通过 1，失败 7，错误 93，通过率= 0.99%</p>
+
+<p class='description'>smoke test</p>
+</div>
+
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 0.99% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 7 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 1 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 101 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover" 
+                                        style="border-collapse:collapse;table-layout:fixed;" border="1">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+    <td width="600px">用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>详细</td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.userlogin_101.test_login.User_login</td>
+    <td class="text-center">4</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">4</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',4)" class="detail" id='c1'>详细</a></td>
+</tr>
+
+<tr id='ft1_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1010101_login_succeed: UCEX QA：验证web用户能用手机号登录成功</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_1'>错误</button>
+    <div id='div_ft1_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_1'>错误</button>
+    <div id='div_ft1_1' class="collapse in">
+    <pre>
+    
+ft1_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\userlogin_101\test_login.py", line 52, in test_No1010101_login_succeed
+    logger.logger.info(str(response_output_data))
+UnboundLocalError: local variable 'response_output_data' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1010102_login_nonexistphone: UCEX QA：验证手机号不存在，登陆失败</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>错误</button>
+    <div id='div_ft1_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_2'>错误</button>
+    <div id='div_ft1_2' class="collapse in">
+    <pre>
+    
+ft1_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\userlogin_101\test_login.py", line 74, in test_No1010102_login_nonexistphone
+    logger.logger.info(str(response_output_data))
+UnboundLocalError: local variable 'response_output_data' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1010103_login_errorpasswd: UCEX QA：验证密码错误，登陆失败</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_3'>错误</button>
+    <div id='div_ft1_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_3'>错误</button>
+    <div id='div_ft1_3' class="collapse in">
+    <pre>
+    
+ft1_3: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\userlogin_101\test_login.py", line 97, in test_No1010103_login_errorpasswd
+    logger.logger.info(str(response_output_data))
+UnboundLocalError: local variable 'response_output_data' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft1_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1010104_login_emptyparameters: UCEX QA：验证参数为空，登陆失败</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_4'>错误</button>
+    <div id='div_ft1_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_4'>错误</button>
+    <div id='div_ft1_4' class="collapse in">
+    <pre>
+    
+ft1_4: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\userlogin_101\test_login.py", line 120, in test_No1010104_login_emptyparameters
+    logger.logger.info(str(response_output_data))
+UnboundLocalError: local variable 'response_output_data' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>qaplatform.testcases.userlogin_101.test_captcha.User_captcha</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',1)" class="detail" id='c2'>详细</a></td>
+</tr>
+
+<tr id='pt2_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_No1010201_getcapatcha_succeed: UCEX QA：验证web用户获取图像验证码成功</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>qaplatform.testcases.userlogin_101.test_forget_notice.User_forgetnotice</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c3',2)" class="detail" id='c3'>详细</a></td>
+</tr>
+
+<tr id='ft3_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_No1010601_forgetenotice: UCEX QA：验证web用户忘记密码的短信验证码，手机号输入错误，无法发送</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft3_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft3_1'>失败</button>
+    <div id='div_ft3_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft3_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft3_1'>失败</button>
+    <div id='div_ft3_1' class="collapse in">
+    <pre>
+    
+ft3_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\userlogin_101\test_forget_notice.py", line 55, in test_No1010601_forgetenotice
+    self.assertEqual(response_content.status_code, conf_output_data['httpcode'], 'httpcode is not correct ')
+AssertionError: 405 != 400 : httpcode is not correct 
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft3_2' class='none'>
+    <td class='failCase'><div class='testcase'>test_No1010601_forgetenotice: UCEX QA：验证web用户忘记密码的短信验证码，手机号输入错误，无法发送</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft3_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft3_2'>失败</button>
+    <div id='div_ft3_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft3_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft3_2'>失败</button>
+    <div id='div_ft3_2' class="collapse in">
+    <pre>
+    
+ft3_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\userlogin_101\test_forget_notice.py", line 55, in test_No1010601_forgetenotice
+    self.assertEqual(response_content.status_code, conf_output_data['httpcode'], 'httpcode is not correct ')
+AssertionError: 405 != 400 : httpcode is not correct 
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>qaplatform.testcases.userlogin_101.test_forget_changepasswd.User_forget_changepasswd</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c4',1)" class="detail" id='c4'>详细</a></td>
+</tr>
+
+<tr id='ft4_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_No1010701_forget_changepasswd: UCEX QA：验证web用户忘记密码, 但是验证码错误，无法重置密码</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft4_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft4_1'>失败</button>
+    <div id='div_ft4_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft4_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft4_1'>失败</button>
+    <div id='div_ft4_1' class="collapse in">
+    <pre>
+    
+ft4_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\userlogin_101\test_forget_changepasswd.py", line 55, in test_No1010701_forget_changepasswd
+    self.assertEqual(response_content.status_code, conf_output_data['httpcode'], 'httpcode is not correct ')
+AssertionError: 405 != 400 : httpcode is not correct 
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>qaplatform.testcases.userlogin_101.test_forget_effective.User_forgeteffective</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c5',1)" class="detail" id='c5'>详细</a></td>
+</tr>
+
+<tr id='ft5_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_No1010501_forgeteffective: UCEX QA：验证web用户获取图像验证码成功</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_1'>失败</button>
+    <div id='div_ft5_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_1'>失败</button>
+    <div id='div_ft5_1' class="collapse in">
+    <pre>
+    
+ft5_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\userlogin_101\test_forget_effective.py", line 55, in test_No1010501_forgeteffective
+    self.assertEqual(response_content.status_code, conf_output_data['httpcode'], 'httpcode is not correct ')
+AssertionError: 405 != 500 : httpcode is not correct 
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>qaplatform.testcases.userlogin_101.test_phonecode.User_phonecode</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c6',1)" class="detail" id='c6'>详细</a></td>
+</tr>
+
+<tr id='ft6_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_No1010301_errorcode: UCEX QA：验证web获取短信验证码，图像验证码输入错误</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_1'>失败</button>
+    <div id='div_ft6_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_1'>失败</button>
+    <div id='div_ft6_1' class="collapse in">
+    <pre>
+    
+ft6_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\userlogin_101\test_phonecode.py", line 55, in test_No1010301_errorcode
+    self.assertEqual(response_content.status_code, conf_output_data['httpcode'], 'httpcode is not correct ')
+AssertionError: 405 != 500 : httpcode is not correct 
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>qaplatform.testcases.userlogin_101.test_register.User_register</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c7',1)" class="detail" id='c7'>详细</a></td>
+</tr>
+
+<tr id='ft7_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_No1010801_register_failed: UCEX QA：图形验证码和短信验证码都输入错误，注册失败</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft7_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft7_1'>失败</button>
+    <div id='div_ft7_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft7_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft7_1'>失败</button>
+    <div id='div_ft7_1' class="collapse in">
+    <pre>
+    
+ft7_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\userlogin_101\test_register.py", line 55, in test_No1010801_register_failed
+    self.assertEqual(response_content.status_code, conf_output_data['httpcode'], 'httpcode is not correct ')
+AssertionError: 405 != 400 : httpcode is not correct 
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>qaplatform.testcases.userlogin_101.test_verify_captcha.User_verifycaptcha</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c8',1)" class="detail" id='c8'>详细</a></td>
+</tr>
+
+<tr id='ft8_1' class='none'>
+    <td class='failCase'><div class='testcase'>test_No1010401_verifycapatcha: UCEX QA：验证用户输入的图形验证码</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft8_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft8_1'>失败</button>
+    <div id='div_ft8_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft8_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft8_1'>失败</button>
+    <div id='div_ft8_1' class="collapse in">
+    <pre>
+    
+ft8_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\userlogin_101\test_verify_captcha.py", line 55, in test_No1010401_verifycapatcha
+    self.assertEqual(response_content.status_code, conf_output_data['httpcode'], 'httpcode is not correct ')
+AssertionError: 405 != 500 : httpcode is not correct 
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.homepage_102.test_all_coins.Homepage_all_coins</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c9',1)" class="detail" id='c9'>详细</a></td>
+</tr>
+
+<tr id='ft9_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1020401_get_all_coins_succeed: UCEX QA：获取当前支持的所有币种列表</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft9_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft9_1'>错误</button>
+    <div id='div_ft9_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft9_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft9_1'>错误</button>
+    <div id='div_ft9_1' class="collapse in">
+    <pre>
+    
+ft9_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\homepage_102\test_all_coins.py", line 56, in test_No1020401_get_all_coins_succeed
+    self.assertEqual(response_output_data['code'], conf_output_data['code'],    'requests status code  error')
+UnboundLocalError: local variable 'response_output_data' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.homepage_102.test_hotcoin_list.Homepage_hotcoins_list</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c10',1)" class="detail" id='c10'>详细</a></td>
+</tr>
+
+<tr id='ft10_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1020501_get_hotcoins_list_succeed: UCEX QA：获取热门币列表</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft10_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft10_1'>错误</button>
+    <div id='div_ft10_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft10_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft10_1'>错误</button>
+    <div id='div_ft10_1' class="collapse in">
+    <pre>
+    
+ft10_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\homepage_102\test_hotcoin_list.py", line 56, in test_No1020501_get_hotcoins_list_succeed
+    self.assertEqual(response_output_data['code'], conf_output_data['code'],    'requests status code  error')
+UnboundLocalError: local variable 'response_output_data' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.homepage_102.test_internationals.Homepage_international</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c11',1)" class="detail" id='c11'>详细</a></td>
+</tr>
+
+<tr id='ft11_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1020201_get_internationals_succeed: UCEX QA：获取国际化文案</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft11_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft11_1'>错误</button>
+    <div id='div_ft11_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft11_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft11_1'>错误</button>
+    <div id='div_ft11_1' class="collapse in">
+    <pre>
+    
+ft11_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\homepage_102\test_internationals.py", line 56, in test_No1020201_get_internationals_succeed
+    self.assertEqual(response_output_data['code'], conf_output_data['code'],    'requests status code  error')
+UnboundLocalError: local variable 'response_output_data' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.homepage_102.test_markets_all.Homepage_markets_all</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c12',1)" class="detail" id='c12'>详细</a></td>
+</tr>
+
+<tr id='ft12_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1020601_get_markets_all_succeed: UCEX QA：获取当前币币交易的所有市场列表</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft12_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft12_1'>错误</button>
+    <div id='div_ft12_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft12_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft12_1'>错误</button>
+    <div id='div_ft12_1' class="collapse in">
+    <pre>
+    
+ft12_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\homepage_102\test_markets_all.py", line 56, in test_No1020601_get_markets_all_succeed
+    self.assertEqual(response_output_data['code'], conf_output_data['code'],    'requests status code  error')
+UnboundLocalError: local variable 'response_output_data' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.homepage_102.test_markets_allcurrencies.Homepage_markets_allcurrencies</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c13',1)" class="detail" id='c13'>详细</a></td>
+</tr>
+
+<tr id='ft13_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1020301_get_markets_allcurrencies_succeed: UCEX QA：获取当前支持的市场结算币种</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft13_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft13_1'>错误</button>
+    <div id='div_ft13_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft13_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft13_1'>错误</button>
+    <div id='div_ft13_1' class="collapse in">
+    <pre>
+    
+ft13_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\homepage_102\test_markets_allcurrencies.py", line 56, in test_No1020301_get_markets_allcurrencies_succeed
+    self.assertEqual(response_output_data['code'], conf_output_data['code'],    'requests status code  error')
+UnboundLocalError: local variable 'response_output_data' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.homepage_102.test_pc_banner.Homepage_banner</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c14',1)" class="detail" id='c14'>详细</a></td>
+</tr>
+
+<tr id='ft14_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1020101_get_pcbanner_succeed: UCEX QA：获取pc首页的banner list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft14_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft14_1'>错误</button>
+    <div id='div_ft14_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft14_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft14_1'>错误</button>
+    <div id='div_ft14_1' class="collapse in">
+    <pre>
+    
+ft14_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\homepage_102\test_pc_banner.py", line 56, in test_No1020101_get_pcbanner_succeed
+    self.assertEqual(response_output_data['code'], conf_output_data['code'],    'requests status code  error')
+UnboundLocalError: local variable 'response_output_data' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.homepage_102.test_tiker.tiker_24h</td>
+    <td class="text-center">3</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">3</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c15',3)" class="detail" id='c15'>详细</a></td>
+</tr>
+
+<tr id='ft15_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1020701_coinstiker_history_false: UCEX QA：ticker 不需要历史数据</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft15_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft15_1'>错误</button>
+    <div id='div_ft15_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft15_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft15_1'>错误</button>
+    <div id='div_ft15_1' class="collapse in">
+    <pre>
+    
+ft15_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\homepage_102\test_tiker.py", line 52, in test_No1020701_coinstiker_history_false
+    logger.logger.info(str(response_output_data))
+UnboundLocalError: local variable 'response_output_data' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft15_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1020702_coinstiker_history_true_and_allcoins: UCEX QA：ticker 不指定币种，获取所有币种，而且需要历史数据</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft15_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft15_2'>错误</button>
+    <div id='div_ft15_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft15_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft15_2'>错误</button>
+    <div id='div_ft15_2' class="collapse in">
+    <pre>
+    
+ft15_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\homepage_102\test_tiker.py", line 75, in test_No1020702_coinstiker_history_true_and_allcoins
+    logger.logger.info(str(response_output_data))
+UnboundLocalError: local variable 'response_output_data' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft15_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1020703_coinstiker_history_true_and_specify_coins: UCEX QA：ticker 指定币种，而且需要历史数据</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft15_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft15_3'>错误</button>
+    <div id='div_ft15_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft15_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft15_3'>错误</button>
+    <div id='div_ft15_3' class="collapse in">
+    <pre>
+    
+ft15_3: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\homepage_102\test_tiker.py", line 98, in test_No1020703_coinstiker_history_true_and_specify_coins
+    logger.logger.info(str(response_output_data))
+UnboundLocalError: local variable 'response_output_data' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.homepage_102.test_user_markets.Homepage_user_markets</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c16',1)" class="detail" id='c16'>详细</a></td>
+</tr>
+
+<tr id='ft16_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1020801_get_user_markets_succeed: UCEX QA：获取当前用户自选的市场列表</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft16_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft16_1'>错误</button>
+    <div id='div_ft16_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft16_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft16_1'>错误</button>
+    <div id='div_ft16_1' class="collapse in">
+    <pre>
+    
+ft16_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\homepage_102\test_user_markets.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.homepage_102.test_user_profile.Homepage_user_profile</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c17',1)" class="detail" id='c17'>详细</a></td>
+</tr>
+
+<tr id='ft17_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1020901_get_user_profile_succeed: UCEX QA：获取用户的profile信息</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft17_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft17_1'>错误</button>
+    <div id='div_ft17_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft17_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft17_1'>错误</button>
+    <div id='div_ft17_1' class="collapse in">
+    <pre>
+    
+ft17_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\homepage_102\test_user_profile.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.c2c_103.test_c2c_boundary.C2C_boundary</td>
+    <td class="text-center">10</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">10</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c18',10)" class="detail" id='c18'>详细</a></td>
+</tr>
+
+<tr id='ft18_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030201_get_BTC_sell_list: UCEX QA：BTC sell list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft18_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft18_1'>错误</button>
+    <div id='div_ft18_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft18_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft18_1'>错误</button>
+    <div id='div_ft18_1' class="collapse in">
+    <pre>
+    
+ft18_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_boundary.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft18_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030202_get_ETH_sell_list: UCEX QA：ETH sell list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft18_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft18_2'>错误</button>
+    <div id='div_ft18_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft18_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft18_2'>错误</button>
+    <div id='div_ft18_2' class="collapse in">
+    <pre>
+    
+ft18_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_boundary.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft18_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030203_get_USDT_sell_list: UCEX QA：USDT sell list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft18_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft18_3'>错误</button>
+    <div id='div_ft18_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft18_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft18_3'>错误</button>
+    <div id='div_ft18_3' class="collapse in">
+    <pre>
+    
+ft18_3: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_boundary.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft18_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030204_get_BG_sell_list: UCEX QA：BG sell list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft18_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft18_4'>错误</button>
+    <div id='div_ft18_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft18_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft18_4'>错误</button>
+    <div id='div_ft18_4' class="collapse in">
+    <pre>
+    
+ft18_4: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_boundary.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft18_5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030205_get_nonexistcoin_sell_list: UCEX QA：get sell list, but coin code does not exist</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft18_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft18_5'>错误</button>
+    <div id='div_ft18_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft18_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft18_5'>错误</button>
+    <div id='div_ft18_5' class="collapse in">
+    <pre>
+    
+ft18_5: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_boundary.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft18_6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030206_get_BTC_buy_list: UCEX QA：get BTC buy list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft18_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft18_6'>错误</button>
+    <div id='div_ft18_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft18_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft18_6'>错误</button>
+    <div id='div_ft18_6' class="collapse in">
+    <pre>
+    
+ft18_6: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_boundary.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft18_7' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030207_get_ETH_buy_list: UCEX QA：get ETH buy list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft18_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft18_7'>错误</button>
+    <div id='div_ft18_7' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft18_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft18_7'>错误</button>
+    <div id='div_ft18_7' class="collapse in">
+    <pre>
+    
+ft18_7: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_boundary.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft18_8' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030208_get_USDT_buy_list: UCEX QA：get USDT buy list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft18_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft18_8'>错误</button>
+    <div id='div_ft18_8' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft18_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft18_8'>错误</button>
+    <div id='div_ft18_8' class="collapse in">
+    <pre>
+    
+ft18_8: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_boundary.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft18_9' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030209_get_BG_buy_list: UCEX QA：get BG buy list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft18_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft18_9'>错误</button>
+    <div id='div_ft18_9' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft18_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft18_9'>错误</button>
+    <div id='div_ft18_9' class="collapse in">
+    <pre>
+    
+ft18_9: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_boundary.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft18_10' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030210_get_BTC_otctype_error_list: UCEX QA：get BTC list, but otc type error</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft18_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft18_10'>错误</button>
+    <div id='div_ft18_10' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft18_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft18_10'>错误</button>
+    <div id='div_ft18_10' class="collapse in">
+    <pre>
+    
+ft18_10: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_boundary.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.c2c_103.test_c2c_listed.C2C_listed</td>
+    <td class="text-center">10</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">10</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c19',10)" class="detail" id='c19'>详细</a></td>
+</tr>
+
+<tr id='ft19_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030202_get_ETH_sell_list: UCEX QA：ETH sell list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft19_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft19_1'>错误</button>
+    <div id='div_ft19_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft19_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft19_1'>错误</button>
+    <div id='div_ft19_1' class="collapse in">
+    <pre>
+    
+ft19_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_listed.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft19_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030301_get_BTC_sell_list: UCEX QA：BTC sell list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft19_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft19_2'>错误</button>
+    <div id='div_ft19_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft19_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft19_2'>错误</button>
+    <div id='div_ft19_2' class="collapse in">
+    <pre>
+    
+ft19_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_listed.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft19_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030303_get_USDT_sell_list: UCEX QA：USDT sell list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft19_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft19_3'>错误</button>
+    <div id='div_ft19_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft19_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft19_3'>错误</button>
+    <div id='div_ft19_3' class="collapse in">
+    <pre>
+    
+ft19_3: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_listed.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft19_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030304_get_BG_sell_list: UCEX QA：BG sell list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft19_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft19_4'>错误</button>
+    <div id='div_ft19_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft19_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft19_4'>错误</button>
+    <div id='div_ft19_4' class="collapse in">
+    <pre>
+    
+ft19_4: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_listed.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft19_5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030305_get_nonexistcoin_sell_list: UCEX QA：get sell list, but coin code does not exist</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft19_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft19_5'>错误</button>
+    <div id='div_ft19_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft19_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft19_5'>错误</button>
+    <div id='div_ft19_5' class="collapse in">
+    <pre>
+    
+ft19_5: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_listed.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft19_6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030306_get_BTC_buy_list: UCEX QA：get BTC buy list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft19_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft19_6'>错误</button>
+    <div id='div_ft19_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft19_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft19_6'>错误</button>
+    <div id='div_ft19_6' class="collapse in">
+    <pre>
+    
+ft19_6: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_listed.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft19_7' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030307_get_ETH_buy_list: UCEX QA：get ETH buy list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft19_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft19_7'>错误</button>
+    <div id='div_ft19_7' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft19_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft19_7'>错误</button>
+    <div id='div_ft19_7' class="collapse in">
+    <pre>
+    
+ft19_7: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_listed.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft19_8' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030308_get_USDT_buy_list: UCEX QA：get USDT buy list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft19_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft19_8'>错误</button>
+    <div id='div_ft19_8' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft19_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft19_8'>错误</button>
+    <div id='div_ft19_8' class="collapse in">
+    <pre>
+    
+ft19_8: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_listed.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft19_9' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030309_get_BG_buy_list: UCEX QA：get BG buy list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft19_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft19_9'>错误</button>
+    <div id='div_ft19_9' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft19_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft19_9'>错误</button>
+    <div id='div_ft19_9' class="collapse in">
+    <pre>
+    
+ft19_9: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_listed.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft19_10' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030310_get_BTC_otctype_error_list: UCEX QA：get BTC list, but otc type error</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft19_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft19_10'>错误</button>
+    <div id='div_ft19_10' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft19_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft19_10'>错误</button>
+    <div id='div_ft19_10' class="collapse in">
+    <pre>
+    
+ft19_10: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_listed.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.c2c_103.test_c2c_trend.C2C_trend</td>
+    <td class="text-center">5</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">5</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c20',5)" class="detail" id='c20'>详细</a></td>
+</tr>
+
+<tr id='ft20_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030401_get_BTC_trend: UCEX QA：BTC trend</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft20_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft20_1'>错误</button>
+    <div id='div_ft20_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft20_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft20_1'>错误</button>
+    <div id='div_ft20_1' class="collapse in">
+    <pre>
+    
+ft20_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_trend.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft20_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030402_get_ETH_trend: UCEX QA：ETH trend</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft20_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft20_2'>错误</button>
+    <div id='div_ft20_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft20_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft20_2'>错误</button>
+    <div id='div_ft20_2' class="collapse in">
+    <pre>
+    
+ft20_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_trend.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft20_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030403_get_USDT_trend: UCEX QA：USDT trend</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft20_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft20_3'>错误</button>
+    <div id='div_ft20_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft20_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft20_3'>错误</button>
+    <div id='div_ft20_3' class="collapse in">
+    <pre>
+    
+ft20_3: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_trend.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft20_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030404_get_BG_trend: UCEX QA：BG trend</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft20_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft20_4'>错误</button>
+    <div id='div_ft20_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft20_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft20_4'>错误</button>
+    <div id='div_ft20_4' class="collapse in">
+    <pre>
+    
+ft20_4: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_trend.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft20_5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030405_get_trend_coincode_nonexist: UCEX QA：trend, coin code does not exist</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft20_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft20_5'>错误</button>
+    <div id='div_ft20_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft20_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft20_5'>错误</button>
+    <div id='div_ft20_5' class="collapse in">
+    <pre>
+    
+ft20_5: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_trend.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.c2c_103.test_c2c_recently.C2C_recently</td>
+    <td class="text-center">5</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">5</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c21',5)" class="detail" id='c21'>详细</a></td>
+</tr>
+
+<tr id='ft21_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030801_get_BTC_recent_trades_list: UCEX QA：BTC recent trades list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft21_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft21_1'>错误</button>
+    <div id='div_ft21_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft21_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft21_1'>错误</button>
+    <div id='div_ft21_1' class="collapse in">
+    <pre>
+    
+ft21_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_recently.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft21_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030802_get_ETH_recent_trades_list: UCEX QA：ETH recent trades list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft21_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft21_2'>错误</button>
+    <div id='div_ft21_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft21_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft21_2'>错误</button>
+    <div id='div_ft21_2' class="collapse in">
+    <pre>
+    
+ft21_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_recently.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft21_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030803_get_USDT_recent_trades_list: UCEX QA：USDT recent trades list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft21_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft21_3'>错误</button>
+    <div id='div_ft21_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft21_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft21_3'>错误</button>
+    <div id='div_ft21_3' class="collapse in">
+    <pre>
+    
+ft21_3: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_recently.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft21_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030804_get_BG_recent_trades_list: UCEX QA：BG recent trades list</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft21_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft21_4'>错误</button>
+    <div id='div_ft21_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft21_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft21_4'>错误</button>
+    <div id='div_ft21_4' class="collapse in">
+    <pre>
+    
+ft21_4: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_recently.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft21_5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030805_get_recent_trades_list_coincode_nonexist: UCEX QA：recent trades list, coin code does not exist</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft21_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft21_5'>错误</button>
+    <div id='div_ft21_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft21_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft21_5'>错误</button>
+    <div id='div_ft21_5' class="collapse in">
+    <pre>
+    
+ft21_5: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_recently.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.c2c_103.test_c2c_query_orders.C2C_queryOrders</td>
+    <td class="text-center">13</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">13</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c22',13)" class="detail" id='c22'>详细</a></td>
+</tr>
+
+<tr id='ft22_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030501_query_all_orders: UCEX QA：我的全部订单，默认查询全部</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft22_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft22_1'>错误</button>
+    <div id='div_ft22_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft22_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft22_1'>错误</button>
+    <div id='div_ft22_1' class="collapse in">
+    <pre>
+    
+ft22_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_query_orders.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft22_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030502_query_by_otc_client_tradeno: UCEX QA：我的全部订单，根据otc_client_trade_no查询</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft22_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft22_2'>错误</button>
+    <div id='div_ft22_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft22_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft22_2'>错误</button>
+    <div id='div_ft22_2' class="collapse in">
+    <pre>
+    
+ft22_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_query_orders.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft22_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030503_query_by_otc_type_sell: UCEX QA：我的全部订单，查询卖出类型</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft22_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft22_3'>错误</button>
+    <div id='div_ft22_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft22_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft22_3'>错误</button>
+    <div id='div_ft22_3' class="collapse in">
+    <pre>
+    
+ft22_3: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_query_orders.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft22_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030504_query_by_otc_type_buy: UCEX QA：我的全部订单，查询买的类型</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft22_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft22_4'>错误</button>
+    <div id='div_ft22_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft22_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft22_4'>错误</button>
+    <div id='div_ft22_4' class="collapse in">
+    <pre>
+    
+ft22_4: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_query_orders.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft22_5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030505_query_by_otc_type_error: UCEX QA：我的全部订单，查询一个不存在的类型</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft22_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft22_5'>错误</button>
+    <div id='div_ft22_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft22_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft22_5'>错误</button>
+    <div id='div_ft22_5' class="collapse in">
+    <pre>
+    
+ft22_5: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_query_orders.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft22_6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030506_query_by_otc_status_completed: UCEX QA：我的全部订单，查询已完成状态的订单</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft22_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft22_6'>错误</button>
+    <div id='div_ft22_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft22_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft22_6'>错误</button>
+    <div id='div_ft22_6' class="collapse in">
+    <pre>
+    
+ft22_6: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_query_orders.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft22_7' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030507_query_by_otc_BTC: UCEX QA：我的全部订单，查询币种为BTC的订单</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft22_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft22_7'>错误</button>
+    <div id='div_ft22_7' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft22_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft22_7'>错误</button>
+    <div id='div_ft22_7' class="collapse in">
+    <pre>
+    
+ft22_7: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_query_orders.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft22_8' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030508_query_by_otc_ETH: UCEX QA：我的全部订单，查询币种为ETH的订单</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft22_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft22_8'>错误</button>
+    <div id='div_ft22_8' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft22_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft22_8'>错误</button>
+    <div id='div_ft22_8' class="collapse in">
+    <pre>
+    
+ft22_8: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_query_orders.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft22_9' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030509_query_by_otc_USDT: UCEX QA：我的全部订单，查询币种为USDT的订单</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft22_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft22_9'>错误</button>
+    <div id='div_ft22_9' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft22_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft22_9'>错误</button>
+    <div id='div_ft22_9' class="collapse in">
+    <pre>
+    
+ft22_9: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_query_orders.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft22_10' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030510_query_by_otc_BG: UCEX QA：我的全部订单，查询币种为BG的订单</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft22_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft22_10'>错误</button>
+    <div id='div_ft22_10' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft22_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft22_10'>错误</button>
+    <div id='div_ft22_10' class="collapse in">
+    <pre>
+    
+ft22_10: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_query_orders.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft22_11' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030511_query_by_otc_coincode_error: UCEX QA：我的全部订单，查询币种不存在</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft22_11' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft22_11'>错误</button>
+    <div id='div_ft22_11' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft22_11' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft22_11'>错误</button>
+    <div id='div_ft22_11' class="collapse in">
+    <pre>
+    
+ft22_11: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_query_orders.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft22_12' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030512_query_by_otc_date: UCEX QA：我的全部订单，根据起止时间查询</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft22_12' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft22_12'>错误</button>
+    <div id='div_ft22_12' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft22_12' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft22_12'>错误</button>
+    <div id='div_ft22_12' class="collapse in">
+    <pre>
+    
+ft22_12: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_query_orders.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft22_13' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030513_query_by_otc_complex: UCEX QA：我的全部订单，交易号+类型+时间+币种组合查询</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft22_13' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft22_13'>错误</button>
+    <div id='div_ft22_13' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft22_13' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft22_13'>错误</button>
+    <div id='div_ft22_13' class="collapse in">
+    <pre>
+    
+ft22_13: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_query_orders.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.c2c_103.test_c2c_get_detail.C2C_detail</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">2</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c23',2)" class="detail" id='c23'>详细</a></td>
+</tr>
+
+<tr id='ft23_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030601_get_exist_detail: UCEX QA：查看一个存在的订单详情</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft23_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft23_1'>错误</button>
+    <div id='div_ft23_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft23_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft23_1'>错误</button>
+    <div id='div_ft23_1' class="collapse in">
+    <pre>
+    
+ft23_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_get_detail.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft23_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030602_get_nonexist_detail: UCEX QA：查看一个不存在的订单详情</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft23_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft23_2'>错误</button>
+    <div id='div_ft23_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft23_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft23_2'>错误</button>
+    <div id='div_ft23_2' class="collapse in">
+    <pre>
+    
+ft23_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_get_detail.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.c2c_103.test_c2c_get_trade_message.C2C_trademessage</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">2</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c24',2)" class="detail" id='c24'>详细</a></td>
+</tr>
+
+<tr id='ft24_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030701_get_exist_trade_message: UCEX QA：查看一个存在的订单的消息</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft24_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft24_1'>错误</button>
+    <div id='div_ft24_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft24_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft24_1'>错误</button>
+    <div id='div_ft24_1' class="collapse in">
+    <pre>
+    
+ft24_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_get_trade_message.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft24_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030702_get_nonexist_trade_message: UCEX QA：查看一个不存在的订单的消息</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft24_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft24_2'>错误</button>
+    <div id='div_ft24_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft24_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft24_2'>错误</button>
+    <div id='div_ft24_2' class="collapse in">
+    <pre>
+    
+ft24_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_get_trade_message.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.c2c_103.test_1c2c_dealer_create.C2C_dealer_create</td>
+    <td class="text-center">10</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">10</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c25',10)" class="detail" id='c25'>详细</a></td>
+</tr>
+
+<tr id='ft25_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030101_create_BTC_Sell: UCEX QA：dealer creats order_: sell BTC</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft25_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft25_1'>错误</button>
+    <div id='div_ft25_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft25_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft25_1'>错误</button>
+    <div id='div_ft25_1' class="collapse in">
+    <pre>
+    
+ft25_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_1c2c_dealer_create.py", line 41, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft25_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030102_create_ETH_Sell: UCEX QA：dealer creats order_: sell ETH</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft25_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft25_2'>错误</button>
+    <div id='div_ft25_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft25_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft25_2'>错误</button>
+    <div id='div_ft25_2' class="collapse in">
+    <pre>
+    
+ft25_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_1c2c_dealer_create.py", line 41, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft25_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030104_create_BG_Sell: UCEX QA：dealer creats order_: sell BG</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft25_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft25_3'>错误</button>
+    <div id='div_ft25_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft25_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft25_3'>错误</button>
+    <div id='div_ft25_3' class="collapse in">
+    <pre>
+    
+ft25_3: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_1c2c_dealer_create.py", line 41, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft25_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030105_create_Sell_coincode_error: UCEX QA：dealer creats order_: sell, but coin code does not exist</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft25_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft25_4'>错误</button>
+    <div id='div_ft25_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft25_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft25_4'>错误</button>
+    <div id='div_ft25_4' class="collapse in">
+    <pre>
+    
+ft25_4: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_1c2c_dealer_create.py", line 41, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft25_5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030106_create_Sell_assetpassword_error: UCEX QA：dealer creats order_: sell BTC, but asset password error</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft25_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft25_5'>错误</button>
+    <div id='div_ft25_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft25_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft25_5'>错误</button>
+    <div id='div_ft25_5' class="collapse in">
+    <pre>
+    
+ft25_5: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_1c2c_dealer_create.py", line 41, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft25_6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030107_create_Buy_BTC: UCEX QA：dealer creats order_: buy BTC</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft25_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft25_6'>错误</button>
+    <div id='div_ft25_6' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft25_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft25_6'>错误</button>
+    <div id='div_ft25_6' class="collapse in">
+    <pre>
+    
+ft25_6: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_1c2c_dealer_create.py", line 41, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft25_7' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030108_create_Buy_ETH: UCEX QA：dealer creats order_: buy ETH</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft25_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft25_7'>错误</button>
+    <div id='div_ft25_7' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft25_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft25_7'>错误</button>
+    <div id='div_ft25_7' class="collapse in">
+    <pre>
+    
+ft25_7: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_1c2c_dealer_create.py", line 41, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft25_8' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030110_create_Buy_BG: UCEX QA：dealer creats order_: buy BG</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft25_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft25_8'>错误</button>
+    <div id='div_ft25_8' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft25_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft25_8'>错误</button>
+    <div id='div_ft25_8' class="collapse in">
+    <pre>
+    
+ft25_8: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_1c2c_dealer_create.py", line 41, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft25_9' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030111_create_Buy_coincode_error: UCEX QA：dealer creats order_: buy, but coin code does not exist</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft25_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft25_9'>错误</button>
+    <div id='div_ft25_9' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft25_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft25_9'>错误</button>
+    <div id='div_ft25_9' class="collapse in">
+    <pre>
+    
+ft25_9: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_1c2c_dealer_create.py", line 41, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft25_10' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030112_create_OTC_type_error: UCEX QA：dealer creats order_: otc type error</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft25_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft25_10'>错误</button>
+    <div id='div_ft25_10' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft25_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft25_10'>错误</button>
+    <div id='div_ft25_10' class="collapse in">
+    <pre>
+    
+ft25_10: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_1c2c_dealer_create.py", line 41, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.c2c_103.test_c2c_isdealer.C2C_isdealer</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c26',1)" class="detail" id='c26'>详细</a></td>
+</tr>
+
+<tr id='ft26_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1031401_isdealer: UCEX QA：is dealer</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft26_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft26_1'>错误</button>
+    <div id='div_ft26_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft26_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft26_1'>错误</button>
+    <div id='div_ft26_1' class="collapse in">
+    <pre>
+    
+ft26_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_isdealer.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.c2c_103.test_c2c_remind.C2C_remind</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c27',1)" class="detail" id='c27'>详细</a></td>
+</tr>
+
+<tr id='ft27_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1031301_get_remind: UCEX QA：dealer transaction remind</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft27_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft27_1'>错误</button>
+    <div id='div_ft27_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft27_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft27_1'>错误</button>
+    <div id='div_ft27_1' class="collapse in">
+    <pre>
+    
+ft27_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_remind.py", line 39, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.c2c_103.test_c2c_user_buy.C2C_Buy</td>
+    <td class="text-center">5</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">5</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c28',5)" class="detail" id='c28'>详细</a></td>
+</tr>
+
+<tr id='ft28_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030901_buy_BTC_smallerThanMinlimit: UCEX QA：buy BTC, but the total money is less than the order's min limit</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft28_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft28_1'>错误</button>
+    <div id='div_ft28_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft28_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft28_1'>错误</button>
+    <div id='div_ft28_1' class="collapse in">
+    <pre>
+    
+ft28_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_user_buy.py", line 40, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft28_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030902_buy_BTC_biggerThanMaxlimit: UCEX QA：buy BTC, but the total money is more than the order's max limit</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft28_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft28_2'>错误</button>
+    <div id='div_ft28_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft28_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft28_2'>错误</button>
+    <div id='div_ft28_2' class="collapse in">
+    <pre>
+    
+ft28_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_user_buy.py", line 40, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft28_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030903_buy_BTC_cannottrade_toolow: UCEX QA：buy BTC, the price is too low, can not trade</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft28_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft28_3'>错误</button>
+    <div id='div_ft28_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft28_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft28_3'>错误</button>
+    <div id='div_ft28_3' class="collapse in">
+    <pre>
+    
+ft28_3: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_user_buy.py", line 40, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft28_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030904_buy_BTC_success: UCEX QA：buy BTC, success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft28_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft28_4'>错误</button>
+    <div id='div_ft28_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft28_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft28_4'>错误</button>
+    <div id='div_ft28_4' class="collapse in">
+    <pre>
+    
+ft28_4: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_user_buy.py", line 40, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft28_5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1030905_buy_coincode_error: UCEX QA：buy, but coin code does not exist</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft28_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft28_5'>错误</button>
+    <div id='div_ft28_5' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft28_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft28_5'>错误</button>
+    <div id='div_ft28_5' class="collapse in">
+    <pre>
+    
+ft28_5: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_user_buy.py", line 40, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.c2c_103.test_c2c_user_cancle_trade.C2C_cancle_trade</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">2</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c29',2)" class="detail" id='c29'>详细</a></td>
+</tr>
+
+<tr id='ft29_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1031101_buy_BTC_cancle_trade_success: UCEX QA：buy BTC, get the order id and create trade, then cancle</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft29_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft29_1'>错误</button>
+    <div id='div_ft29_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft29_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft29_1'>错误</button>
+    <div id='div_ft29_1' class="collapse in">
+    <pre>
+    
+ft29_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_user_cancle_trade.py", line 43, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft29_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1031102_cancle_unexist_trade: UCEX QA： cancle otc buy trade, but trade id not exist</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft29_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft29_2'>错误</button>
+    <div id='div_ft29_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft29_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft29_2'>错误</button>
+    <div id='div_ft29_2' class="collapse in">
+    <pre>
+    
+ft29_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_user_cancle_trade.py", line 43, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.c2c_103.test_c2c_user_create_trade.C2C_create_trade</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">2</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c30',2)" class="detail" id='c30'>详细</a></td>
+</tr>
+
+<tr id='ft30_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1031001_buy_BTC_create_trade_success: UCEX QA：buy BTC, get the order id and create trade success</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft30_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft30_1'>错误</button>
+    <div id='div_ft30_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft30_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft30_1'>错误</button>
+    <div id='div_ft30_1' class="collapse in">
+    <pre>
+    
+ft30_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_user_create_trade.py", line 41, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft30_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1031002_buy_BTC_create_trade_failed_orderid_not_exist: UCEX QA：buy BTC, create trade failed, because order id not exist</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft30_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft30_2'>错误</button>
+    <div id='div_ft30_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft30_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft30_2'>错误</button>
+    <div id='div_ft30_2' class="collapse in">
+    <pre>
+    
+ft30_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\c2c_103\test_c2c_user_create_trade.py", line 41, in setUp
+    self.token_value = obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.exchange_104.test_orderceate.ExchangeOrder</td>
+    <td class="text-center">4</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">4</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c31',4)" class="detail" id='c31'>详细</a></td>
+</tr>
+
+<tr id='ft31_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1040101_exchangeorderscreate_BUY: UCEX QA：验证币币交易, 用户进行买入交易成功</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft31_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft31_1'>错误</button>
+    <div id='div_ft31_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft31_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft31_1'>错误</button>
+    <div id='div_ft31_1' class="collapse in">
+    <pre>
+    
+ft31_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\exchange_104\test_orderceate.py", line 50, in test_No1040101_exchangeorderscreate_BUY
+    self.token_value =obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft31_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1040102_exchangeorderscreate_SELL: UCEX QA：验证币币交易, 用户进行卖出交易成功</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft31_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft31_2'>错误</button>
+    <div id='div_ft31_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft31_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft31_2'>错误</button>
+    <div id='div_ft31_2' class="collapse in">
+    <pre>
+    
+ft31_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\exchange_104\test_orderceate.py", line 83, in test_No1040102_exchangeorderscreate_SELL
+    self.token_value =obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft31_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1040103_exchangeorderscreate_BUY_notenough: UCEX QA：验证币币交易, 用户余额不足进行买入交易失败</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft31_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft31_3'>错误</button>
+    <div id='div_ft31_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft31_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft31_3'>错误</button>
+    <div id='div_ft31_3' class="collapse in">
+    <pre>
+    
+ft31_3: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\exchange_104\test_orderceate.py", line 113, in test_No1040103_exchangeorderscreate_BUY_notenough
+    self.token_value =obj_token_notenough.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft31_4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1040104_exchangeorderscreate_SELL_notenough: UCEX QA：验证币币交易, 用户余额不足进行卖出交易</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft31_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft31_4'>错误</button>
+    <div id='div_ft31_4' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft31_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft31_4'>错误</button>
+    <div id='div_ft31_4' class="collapse in">
+    <pre>
+    
+ft31_4: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\exchange_104\test_orderceate.py", line 145, in test_No1040104_exchangeorderscreate_SELL_notenough
+    self.token_value =obj_token_notenough.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.exchange_104.test_orderswithTotalRecordsCountquery.withTotalRecordsCount</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c32',1)" class="detail" id='c32'>详细</a></td>
+</tr>
+
+<tr id='ft32_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1040301_historyquery: UCEX QA：验证币币交易, 历史委托查询成功</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft32_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft32_1'>错误</button>
+    <div id='div_ft32_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft32_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft32_1'>错误</button>
+    <div id='div_ft32_1' class="collapse in">
+    <pre>
+    
+ft32_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\exchange_104\test_orderswithTotalRecordsCountquery.py", line 40, in setUp
+    self.token_value =obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.exchange_104.test_currentquery.withTotalRecordsCountcurrent</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c33',1)" class="detail" id='c33'>详细</a></td>
+</tr>
+
+<tr id='ft33_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1040201_currentquery: UCEX QA：验证币币交易, 当前委托查询成功</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft33_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft33_1'>错误</button>
+    <div id='div_ft33_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft33_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft33_1'>错误</button>
+    <div id='div_ft33_1' class="collapse in">
+    <pre>
+    
+ft33_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\exchange_104\test_currentquery.py", line 37, in setUp
+    self.token_value =obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.exchange_104.test_dealsfind.tradesdealsfind</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c34',1)" class="detail" id='c34'>详细</a></td>
+</tr>
+
+<tr id='ft34_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1040401_dealsfind: UCEX QA：验证币币交易, 历史成交查询</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft34_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft34_1'>错误</button>
+    <div id='div_ft34_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft34_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft34_1'>错误</button>
+    <div id='div_ft34_1' class="collapse in">
+    <pre>
+    
+ft34_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\exchange_104\test_dealsfind.py", line 37, in setUp
+    self.token_value =obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>qaplatform.testcases.exchange_104.test_getoraderid.getorderidquery</td>
+    <td class="text-center">3</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center">3</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c35',3)" class="detail" id='c35'>详细</a></td>
+</tr>
+
+<tr id='ft35_1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1040501_getorder_NEW: UCEX QA：验证币币交易, FILLED订单查询</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft35_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft35_1'>错误</button>
+    <div id='div_ft35_1' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft35_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft35_1'>错误</button>
+    <div id='div_ft35_1' class="collapse in">
+    <pre>
+    
+ft35_1: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\exchange_104\test_getoraderid.py", line 39, in setUp
+    self.token_value =obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft35_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1040502_getorder_CANCELED: UCEX QA：验证币币交易, CANCELED订单查询</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft35_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft35_2'>错误</button>
+    <div id='div_ft35_2' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft35_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft35_2'>错误</button>
+    <div id='div_ft35_2' class="collapse in">
+    <pre>
+    
+ft35_2: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\exchange_104\test_getoraderid.py", line 39, in setUp
+    self.token_value =obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='ft35_3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_No1040503_getorder_NEW: UCEX QA：验证币币交易, NEW订单查询</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft35_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft35_3'>错误</button>
+    <div id='div_ft35_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft35_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft35_3'>错误</button>
+    <div id='div_ft35_3' class="collapse in">
+    <pre>
+    
+ft35_3: Traceback (most recent call last):
+  File "D:\Coding\qaplatform\qaplatform\testcases\exchange_104\test_getoraderid.py", line 39, in setUp
+    self.token_value =obj_token.gettokenvalue()
+  File "D:\Coding\qaplatform\qaplatform\controller\libs\ucexbackend\headertoken.py", line 76, in gettokenvalue
+    return tokenvalue
+UnboundLocalError: local variable 'tokenvalue' referenced before assignment
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>101</td>
+    <td>1</td>
+    <td>7</td>
+    <td>93</td>
+    <td>通过率：0.99%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+
+</body>
+</html>

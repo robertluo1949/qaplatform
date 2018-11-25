@@ -3,7 +3,7 @@
 title: 自动化测试 UCEX
 author:Robert
 date:20180504
-email:shuibo.luo@ucextech.com
+email:robert_luo1949@163.com
 content:  配置文件
 other:
 '''
@@ -11,7 +11,7 @@ import os,sys,datetime
 
 
 ####服务启动的主机名,端口号,DEBUG模式开关
-HOST_NAME = "192.168.1.108"
+HOST_NAME = "192.168.1.104"
 HOST_PORT = "5000"
 HOST_DEBUG_MODE = True
 
@@ -36,7 +36,7 @@ temp_result={}
 
 REPORT_INFO ={
     0:{
-        "type_id":"01",                                ##类型编号
+        "type_id":0,                                ##类型编号
         "re_dir":RUN_HOME_PATH+"tmp\\reports\\",       ##报告存放目录
         "re_name":"example_test_"+str(datetime.datetime.now().strftime("%Y%m%d%H%M%S"))+".html",  ##报告名称
         "re_title" : "example test",            ##报告标题
@@ -56,22 +56,24 @@ REPORT_INFO ={
 ###邮件发送配置
 EMAIL_SERVER = {
     0:{    ##冒烟测试的邮件配置
-        "mail_host" : "smtp.exmail.qq.com",       # SMTP服务器
-        "mail_user" : "2731541089@qq.com",  # 用户名
+        "type_id":0,
+        "mail_host" : "smtp.qq.com",       # SMTP服务器
+        "mail_user" : "240505723",  # 用户名
         ##mail_pass = "robert1949"  # 授权密码，非登录密码
-        "mail_pass" : "1qaz@WSX",                # 登录密码
-        "sender" : '2731541089@qq.com',    # 发件人邮箱(最好写全, 不然会失败)
-        "receivers" :['240505723@qq.com'],  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
-        "content" : 'smoke test',   ###预置的内容
-        "title" : 'Smoke Test [内含报告地址Report Url]'  # 邮件主题
+        "mail_passwd" : "XXXXXXXXXXXXXXXX",                # 登录密码
+        "sender" : "240505723@qq.com",    # 发件人邮箱(最好写全, 不然会失败)
+        "receivers" :['240505723@qq.com','2731541089@qq.com'],  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+        "content" : "Example test",   ###预置的内容
+        "title" : "Example Test [内含报告地址Report Url]"  # 邮件主题
     },
     1:   ##XXXX测试的邮件配置
         {
         # 第三方 SMTP 服务
+        "type_id": 0,
         "mail_host": "smtp.exmail.qq.com",  # SMTP服务器
         "mail_user": "xxx@163.com",  # 用户名
         ##mail_pass = "robert1949"  # 授权密码，非登录密码
-        "mail_pass": "xxxxxxx",  # 登录密码
+        "mail_passwd": "xxxxxxx",  # 登录密码
         "sender": '240505723@qq.com',  # 发件人邮箱(最好写全, 不然会失败)
         "receivers": ['240505723 @qq.com', 'xxxxxxx.com'],  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
         "content": '我用Python',
