@@ -3,7 +3,7 @@
 title:逻辑控制模块   control
 author:Robert
 date:20171115
-email:shuibo.luo@ucextech.com
+email:robert_luo1949@163.com
 '''
 
 import unittest

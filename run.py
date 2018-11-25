@@ -3,7 +3,7 @@
 title: 自动化测试 biger
 author:Robert
 date:20180504
-email:shuibo.luo@ucextech.com
+email:robert_luo1949@163.com
 content:  java user-userlogin_101
 other:
 '''
@@ -14,16 +14,17 @@ import config
 import os,sys,json
 import importlib
 from qaplatform.controller.libs.email import sendemail
-from qaplatform.controller.libs.htmlreport.HTMLTestReportCN import HTMLTestRunner
+from email.header import Header
+from email.mime.text import MIMEText
+# from qaplatform.controller.libs.htmlreport.HTMLTestReportCN import HTMLTestRunner
+from qaplatform.controller.libs.htmlreport.HTMLTestReportRobert import HTMLTestRunner
 from qaplatform.controller.log import logger
 from qaplatform.testmodel.bigerSmokeTest import SmokeModelSuite
 from qaplatform.testmodel.ExampleTest import ExampleModelSuite
 
-
 app = Flask(__name__,static_folder=config.static_dir,template_folder=config.template_dir)
 
 @app.route('/')
-
 
 # @app.route('/indextmp')
 #
@@ -49,9 +50,8 @@ def indextmp():
 
 @app.route('/test/example',methods=['POST','GET'])
 def testexample():
-    TESTTYPE=0
+    TESTTYPE=config.REPORT_INFO[0]["type_id"]
     logger.logger.info("example test")
-
 
     importlib.reload(config)
     filePath = config.REPORT_INFO[TESTTYPE]["re_dir"] +config.REPORT_INFO[TESTTYPE]["re_name"]
@@ -77,17 +77,31 @@ def testexample():
                    "Report web url": str(config.HOST_NAME+"/"+config.REPORT_INFO[TESTTYPE]["re_name"])}
 
     try:
+        latestfile =sendemail.find_new_file(config.REPORT_INFO[TESTTYPE]["re_dir"])
+        fbr =open(latestfile, mode="r",encoding="utf-8")
+        message =fbr.read()
+        fbr.close()
+
+        # message= message  + '''
+        # <a href={{filePath}}>点此打开报告连接</a>
+        # '''
+        message= message  + '''<a href='''+filePath+'''>点此打开报告连接</a>'''
+
+
         sendemail.sendemailSMTP(
             config.EMAIL_SERVER[TESTTYPE]["mail_host"],    ##邮件发送SMTP host
-            config.EMAIL_SERVER[TESTTYPE]["mail_user"],    ##邮件发送SMTP  user name
-            config.EMAIL_SERVER[TESTTYPE]["mail_pass"],    ##邮件发送SMTP  user password
+            config.EMAIL_SERVER[TESTTYPE]["sender"],    ##邮件发送SMTP  user name
+            config.EMAIL_SERVER[TESTTYPE]["mail_passwd"],    ##邮件发送SMTP  user password
             config.EMAIL_SERVER[TESTTYPE]["receivers"],    ##邮件  收件人
             config.EMAIL_SERVER[TESTTYPE]["title"],        ##邮件  标题
-            str(json.dumps(result_json))            ##邮件  内容
+            # str(json.dumps(result_json))            ##邮件  内容
+            message
+
         )
-        logger.logger.info(str("FROM  "+config.EMAIL_SERVER[TESTTYPE]["mail_host"] +" To  "+ str(config.EMAIL_SERVER[TESTTYPE]["receivers"])))
+
+        logger.logger.info(str("SERVER Host  "+config.EMAIL_SERVER[TESTTYPE]["mail_host"] +" To  "+ str(config.EMAIL_SERVER[TESTTYPE]["receivers"])))
     except BaseException as be:
-        logger.logger.exception("FROM  "+str(config.EMAIL_SERVER[TESTTYPE]["mail_host"]))
+        logger.logger.exception("SERVER Host  "+str(config.EMAIL_SERVER[TESTTYPE]["mail_host"]))
     return json.dumps(result_json)
 
 
