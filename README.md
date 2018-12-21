@@ -13,7 +13,7 @@ smoke Test             <br>
  ------------------testcases : 项目的测试案例包  模板 <br>
  ------------------testdatas : 项目的测试数据包   <br>
  ------------------testmodel : 项目的测试模型包   <br>
-2  temp  :  保存临时文件目录     <br>
+2  tmp  :  保存临时文件目录     <br>
 3  tests :  本项目的测试代码     <br>
 4  venv  :   python3 虚拟机目录 (暂时没有)         <br>
 5  config.py   项目的配置文件[日志][报告][启动参数]  <br>
