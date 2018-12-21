@@ -3,7 +3,7 @@
 title: 自动化测试 biger
 author:Robert
 date:20180504
-email:shuibo.luo@ucextech.com
+email:robert_luo1949@163.com
 content:  uniitest
 other:
 '''
@@ -13,12 +13,12 @@ from email.mime.text import MIMEText
 
 # 第三方 SMTP 服务
 mail_host = "smtp.exmail.qq.com"  # SMTP服务器
-mail_user = "shuibo.luo@ucextech.com"  # 用户名
+mail_user = "robert_luo1949@163.com"  # 用户名
 ##mail_pass = "robert1949"  # 授权密码，非登录密码
 mail_pass = "1qaz@WSX"  # 登录密码
 
-sender = 'shuibo.luo@ucextech.com'    # 发件人邮箱(最好写全, 不然会失败)
-receivers = [ '240505723 @qq.com','shuibo.luo@ucextech.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+sender = 'robert_luo1949@163.com'    # 发件人邮箱(最好写全, 不然会失败)
+receivers = [ '240505723 @qq.com','robert_luo1949@163.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
 
 content = '我用Python'
 title = '人生苦短'  # 邮件主题
@@ -56,5 +56,5 @@ def send_email2(SMTP_host, from_account, from_passwd, to_account, subject, conte
 
 if __name__ == '__main__':
     #sendEmail()
-    receiver = ['jinjing.zhang@ucextech.com','shuibo.luo@ucextech.com']
+    receiver = ['jinjing.zhang@ucextech.com','robert_luo1949@163.com']
     send_email2(mail_host, mail_user, mail_pass, receiver, title, content)

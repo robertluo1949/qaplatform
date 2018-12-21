@@ -1,0 +1,44 @@
+2018-12-21 11:33:05,730 - [smoke test] - INFO - example test
+2018-12-21 11:33:05,731 - [smoke test] - INFO - 生成的报告路径  /home/sbluo/PycharmProjects/qaplatform/tmp/reports/example_test_20181221113305.html
+2018-12-21 11:33:05,735 - [smoke test] - INFO - example test OK  
+2018-12-21 11:33:06,668 - [smoke test] - ERROR - SERVER Host  smtp.qq.com
+Traceback (most recent call last):
+  File "run.py", line 109, in testexample
+    message
+  File "/home/sbluo/PycharmProjects/qaplatform/qaplatform/controller/libs/email/sendemail.py", line 48, in sendemailSMTP
+    email_client.login(from_account, from_passwd)
+  File "/usr/local/lib/python3.7/smtplib.py", line 730, in login
+    raise last_exception
+  File "/usr/local/lib/python3.7/smtplib.py", line 721, in login
+    initial_response_ok=initial_response_ok)
+  File "/usr/local/lib/python3.7/smtplib.py", line 642, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256')
+2018-12-21 11:34:00,063 - [smoke test] - INFO - example test
+2018-12-21 11:34:00,064 - [smoke test] - INFO - 生成的报告路径  /home/sbluo/PycharmProjects/qaplatform/tmp/reports/example_test_20181221113400.html
+2018-12-21 11:34:00,064 - [smoke test] - INFO - example test OK  
+2018-12-21 11:34:00,559 - [smoke test] - ERROR - SERVER Host  smtp.qq.com
+Traceback (most recent call last):
+  File "run.py", line 109, in testexample
+    message
+  File "/home/sbluo/PycharmProjects/qaplatform/qaplatform/controller/libs/email/sendemail.py", line 48, in sendemailSMTP
+    email_client.login(from_account, from_passwd)
+  File "/usr/local/lib/python3.7/smtplib.py", line 730, in login
+    raise last_exception
+  File "/usr/local/lib/python3.7/smtplib.py", line 721, in login
+    initial_response_ok=initial_response_ok)
+  File "/usr/local/lib/python3.7/smtplib.py", line 642, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256')
+2018-12-21 11:43:39,302 - [smoke test] - INFO - example test
+2018-12-21 11:43:39,303 - [smoke test] - INFO - 生成的报告路径  /home/sbluo/PycharmProjects/qaplatform/tmp/reports/example_test_20181221114339.html
+2018-12-21 11:43:39,303 - [smoke test] - INFO - example test OK  
+2018-12-21 11:43:41,524 - [smoke test] - INFO - SERVER Host  smtp.qq.com To  ['240505723@qq.com', '2731541089@qq.com']
+2018-12-21 11:46:09,912 - [smoke test] - INFO - example test
+2018-12-21 11:46:09,912 - [smoke test] - INFO - 生成的报告路径  /home/sbluo/PycharmProjects/qaplatform/tmp/reports/example_test_20181221114609.html
+2018-12-21 11:46:09,913 - [smoke test] - INFO - example test OK  
+2018-12-21 11:46:11,891 - [smoke test] - INFO - SERVER Host  smtp.qq.com To  ['240505723@qq.com', '2731541089@qq.com']
+2018-12-21 11:57:02,481 - [smoke test] - INFO - example test
+2018-12-21 11:57:02,482 - [smoke test] - INFO - 生成的报告路径  /home/sbluo/PycharmProjects/qaplatform/tmp/reports/example_test_20181221115702.html
+2018-12-21 11:57:02,484 - [smoke test] - INFO - example test OK  
+2018-12-21 11:57:04,872 - [smoke test] - INFO - SERVER Host  smtp.qq.com To  ['240505723@qq.com', '2731541089@qq.com']

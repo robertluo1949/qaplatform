@@ -3,17 +3,28 @@
 title: 自动化测试 UCEX
 author:Robert
 date:20180504
-email:shuibo.luo@ucextech.com
+email:robert_luo1949@163.com
 content:  java user-userlogin_101
 other:
 '''
 
+import os
 import smtplib
 from email.header import Header
 from email.mime.text import MIMEText
 from qaplatform.controller.log import logger
 
 
+def find_new_file(dir):
+    '''查找目录下最新的文件'''
+    file_lists = os.listdir(dir)
+    file_lists.sort(key=lambda fn: os.path.getmtime(dir + "/" + fn)
+    if not os.path.isdir(dir + "/" + fn)
+    else 0)
+    print('最新的文件为： ' + file_lists[-1])
+    file = os.path.join(dir, file_lists[-1])
+    print('完整文件路径：', file)
+    return file
 
 def sendEmailSSL(SMTP_host, from_account, from_passwd, to_account, subject, content):
     message = MIMEText(content, 'plain', 'utf-8')  # 内容, 格式, 编码
@@ -30,15 +41,18 @@ def sendEmailSSL(SMTP_host, from_account, from_passwd, to_account, subject, cont
         print(e)
 
 
+
+
 def sendemailSMTP(SMTP_host, from_account, from_passwd, to_account, subject, content):
     email_client = smtplib.SMTP(SMTP_host)
     email_client.login(from_account, from_passwd)
     # create msg
-    msg = MIMEText(content, 'plain', 'utf-8')
+    msg = MIMEText(content, 'html', 'utf-8')
     msg['Subject'] = Header(subject, 'utf-8')  # subject
     msg['From'] = from_account
     msg['To'] = ",".join(to_account)
-    email_client.sendmail(from_account, to_account, msg.as_string())
+    # print("msg.as_string()   ",msg.as_string())
+    email_client.sendmail(from_account, to_account, msg.as_bytes())
 
     email_client.quit()
 

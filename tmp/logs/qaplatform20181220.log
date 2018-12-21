@@ -1,0 +1,79 @@
+2018-12-20 21:55:01,599 - [smoke test] - INFO - example test
+2018-12-20 21:55:01,600 - [smoke test] - INFO - 生成的报告路径  /home/sbluo/PycharmProjects/qaplatform/tmp/reports/example_test_20181220215501.html
+2018-12-20 21:55:01,601 - [smoke test] - INFO - example test OK  
+2018-12-20 21:55:01,601 - [smoke test] - ERROR - SERVER Host  smtp.qq.com
+Traceback (most recent call last):
+  File "run.py", line 91, in testexample
+    latestfile =sendemail.find_new_file(config.REPORT_INFO[TESTTYPE]["re_dir"])
+  File "/home/sbluo/PycharmProjects/qaplatform/qaplatform/controller/libs/email/sendemail.py", line 21, in find_new_file
+    file_lists.sort(key=lambda fn: os.path.getmtime(dir + "\\" + fn)
+  File "/home/sbluo/PycharmProjects/qaplatform/qaplatform/controller/libs/email/sendemail.py", line 22, in <lambda>
+    if not os.path.isdir(dir + "\\" + fn)
+  File "/usr/local/lib/python3.7/genericpath.py", line 55, in getmtime
+    return os.stat(filename).st_mtime
+FileNotFoundError: [Errno 2] No such file or directory: '/home/sbluo/PycharmProjects/qaplatform/tmp/reports/\\smoke_test_20181121130950.html'
+2018-12-20 21:55:43,677 - [smoke test] - INFO - example test
+2018-12-20 21:55:43,677 - [smoke test] - INFO - 生成的报告路径  /home/sbluo/PycharmProjects/qaplatform/tmp/reports/example_test_20181220215543.html
+2018-12-20 21:55:43,678 - [smoke test] - INFO - example test OK  
+2018-12-20 21:55:44,673 - [smoke test] - ERROR - SERVER Host  smtp.qq.com
+Traceback (most recent call last):
+  File "run.py", line 109, in testexample
+    message
+  File "/home/sbluo/PycharmProjects/qaplatform/qaplatform/controller/libs/email/sendemail.py", line 48, in sendemailSMTP
+    email_client.login(from_account, from_passwd)
+  File "/usr/local/lib/python3.7/smtplib.py", line 730, in login
+    raise last_exception
+  File "/usr/local/lib/python3.7/smtplib.py", line 721, in login
+    initial_response_ok=initial_response_ok)
+  File "/usr/local/lib/python3.7/smtplib.py", line 642, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256')
+2018-12-20 21:56:34,013 - [smoke test] - INFO - example test
+2018-12-20 21:56:34,014 - [smoke test] - INFO - 生成的报告路径  /home/sbluo/PycharmProjects/qaplatform/tmp/reports/example_test_20181220215634.html
+2018-12-20 21:56:34,016 - [smoke test] - INFO - example test OK  
+2018-12-20 21:56:35,006 - [smoke test] - ERROR - SERVER Host  smtp.qq.com
+Traceback (most recent call last):
+  File "run.py", line 109, in testexample
+    message
+  File "/home/sbluo/PycharmProjects/qaplatform/qaplatform/controller/libs/email/sendemail.py", line 48, in sendemailSMTP
+    email_client.login(from_account, from_passwd)
+  File "/usr/local/lib/python3.7/smtplib.py", line 730, in login
+    raise last_exception
+  File "/usr/local/lib/python3.7/smtplib.py", line 721, in login
+    initial_response_ok=initial_response_ok)
+  File "/usr/local/lib/python3.7/smtplib.py", line 642, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256')
+2018-12-20 21:57:28,350 - [smoke test] - INFO - example test
+2018-12-20 21:57:28,350 - [smoke test] - INFO - 生成的报告路径  /home/sbluo/PycharmProjects/qaplatform/tmp/reports/example_test_20181220215728.html
+2018-12-20 21:57:28,351 - [smoke test] - INFO - example test OK  
+2018-12-20 21:57:29,171 - [smoke test] - ERROR - SERVER Host  smtp.qq.com
+Traceback (most recent call last):
+  File "run.py", line 109, in testexample
+    message
+  File "/home/sbluo/PycharmProjects/qaplatform/qaplatform/controller/libs/email/sendemail.py", line 48, in sendemailSMTP
+    email_client.login(from_account, from_passwd)
+  File "/usr/local/lib/python3.7/smtplib.py", line 730, in login
+    raise last_exception
+  File "/usr/local/lib/python3.7/smtplib.py", line 721, in login
+    initial_response_ok=initial_response_ok)
+  File "/usr/local/lib/python3.7/smtplib.py", line 642, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256')
+2018-12-21 11:02:47,663 - [smoke test] - INFO - testing logger
+2018-12-21 11:02:52,093 - [smoke test] - INFO - example test
+2018-12-21 11:02:52,093 - [smoke test] - INFO - 生成的报告路径  /home/sbluo/PycharmProjects/qaplatform/tmp/reports/example_test_20181221110252.html
+2018-12-21 11:02:52,094 - [smoke test] - INFO - example test OK  
+2018-12-21 11:02:53,031 - [smoke test] - ERROR - SERVER Host  smtp.qq.com
+Traceback (most recent call last):
+  File "run.py", line 109, in testexample
+    message
+  File "/home/sbluo/PycharmProjects/qaplatform/qaplatform/controller/libs/email/sendemail.py", line 48, in sendemailSMTP
+    email_client.login(from_account, from_passwd)
+  File "/usr/local/lib/python3.7/smtplib.py", line 730, in login
+    raise last_exception
+  File "/usr/local/lib/python3.7/smtplib.py", line 721, in login
+    initial_response_ok=initial_response_ok)
+  File "/usr/local/lib/python3.7/smtplib.py", line 642, in auth
+    raise SMTPAuthenticationError(code, resp)
+smtplib.SMTPAuthenticationError: (535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256')

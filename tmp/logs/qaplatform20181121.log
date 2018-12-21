@@ -12404,3 +12404,5 @@ Traceback (most recent call last):
   File "D:\Python\Python37\lib\smtplib.py", line 642, in auth
     raise SMTPAuthenticationError(code, resp)
 smtplib.SMTPAuthenticationError: (535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256')
+2018-11-21 14:23:16,664 - [smoke test] - INFO - 服务器启动成功
+2018-11-21 14:23:16,768 - [smoke test] - INFO - 服务器启动成功

@@ -123,9 +123,9 @@ function html_escape(s) {
 <div class='heading'>
 <h1 style="font-family: Microsoft YaHei">example test</h1>
 <p class='attribute'><strong>测试人员 : </strong> Robert</p>
-<p class='attribute'><strong>开始时间 : </strong> 2018-11-21 12:41:18</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:00:00.349647</p>
-<p class='attribute'><strong>测试结果 : </strong> 共 4，错误 4，通过率= 0.00%</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-12-21 11:57:02</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:00.000935</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 3，通过 3，通过率= 100.00%</p>
 
 <p class='description'>example test</p>
 </div>
@@ -133,10 +133,10 @@ function html_escape(s) {
 
 
 <p id='show_detail_line'>
-<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 0.00% }</a>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 100.00% }</a>
 <a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 0 }</a>
-<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 0 }</a>
-<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 4 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 3 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 3 }</a>
 </p>
 <table id='result_table' class="table table-condensed table-bordered table-hover" 
                                         style="border-collapse:collapse;table-layout:fixed;" border="1">
@@ -157,114 +157,37 @@ function html_escape(s) {
     <td>详细</td>
 </tr>
 
-<tr class='errorClass warning'>
-    <td>qaplatform.testcases.userlogin_101.test_login.User_login</td>
-    <td class="text-center">4</td>
+<tr class='passClass warning'>
+    <td>qaplatform.testcases.examples_100.test_example.TestStringMethods</td>
+    <td class="text-center">3</td>
+    <td class="text-center">3</td>
     <td class="text-center">0</td>
     <td class="text-center">0</td>
-    <td class="text-center">4</td>
-    <td class="text-center"><a href="javascript:showClassDetail('c1',4)" class="detail" id='c1'>详细</a></td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',3)" class="detail" id='c1'>详细</a></td>
 </tr>
 
-<tr id='ft1_1' class='none'>
-    <td class='errorCase'><div class='testcase'>test_No1010101_login_succeed: UCEX QA：验证web用户能用手机号登录成功</div></td>
-    <td colspan='5' align='center'>
-    <!--默认收起错误信息 -Findyou
-    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_1'>错误</button>
-    <div id='div_ft1_1' class="collapse">  -->
-
-    <!-- 默认展开错误信息 -Findyou -->
-    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_1'>错误</button>
-    <div id='div_ft1_1' class="collapse in">
-    <pre>
-    
-ft1_1: Traceback (most recent call last):
-  File "D:\Coding\qaplatform\qaplatform\testcases\userlogin_101\test_login.py", line 52, in test_No1010101_login_succeed
-    logger.logger.info(str(response_output_data))
-UnboundLocalError: local variable 'response_output_data' referenced before assignment
-
-
-    </pre>
-    </div>
-    </td>
+<tr id='pt1_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_isupper</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
 </tr>
 
-<tr id='ft1_2' class='none'>
-    <td class='errorCase'><div class='testcase'>test_No1010102_login_nonexistphone: UCEX QA：验证手机号不存在，登陆失败</div></td>
-    <td colspan='5' align='center'>
-    <!--默认收起错误信息 -Findyou
-    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>错误</button>
-    <div id='div_ft1_2' class="collapse">  -->
-
-    <!-- 默认展开错误信息 -Findyou -->
-    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_2'>错误</button>
-    <div id='div_ft1_2' class="collapse in">
-    <pre>
-    
-ft1_2: Traceback (most recent call last):
-  File "D:\Coding\qaplatform\qaplatform\testcases\userlogin_101\test_login.py", line 74, in test_No1010102_login_nonexistphone
-    logger.logger.info(str(response_output_data))
-UnboundLocalError: local variable 'response_output_data' referenced before assignment
-
-
-    </pre>
-    </div>
-    </td>
+<tr id='pt1_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_split</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
 </tr>
 
-<tr id='ft1_3' class='none'>
-    <td class='errorCase'><div class='testcase'>test_No1010103_login_errorpasswd: UCEX QA：验证密码错误，登陆失败</div></td>
-    <td colspan='5' align='center'>
-    <!--默认收起错误信息 -Findyou
-    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_3'>错误</button>
-    <div id='div_ft1_3' class="collapse">  -->
-
-    <!-- 默认展开错误信息 -Findyou -->
-    <button id='btn_ft1_3' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_3'>错误</button>
-    <div id='div_ft1_3' class="collapse in">
-    <pre>
-    
-ft1_3: Traceback (most recent call last):
-  File "D:\Coding\qaplatform\qaplatform\testcases\userlogin_101\test_login.py", line 97, in test_No1010103_login_errorpasswd
-    logger.logger.info(str(response_output_data))
-UnboundLocalError: local variable 'response_output_data' referenced before assignment
-
-
-    </pre>
-    </div>
-    </td>
-</tr>
-
-<tr id='ft1_4' class='none'>
-    <td class='errorCase'><div class='testcase'>test_No1010104_login_emptyparameters: UCEX QA：验证参数为空，登陆失败</div></td>
-    <td colspan='5' align='center'>
-    <!--默认收起错误信息 -Findyou
-    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_4'>错误</button>
-    <div id='div_ft1_4' class="collapse">  -->
-
-    <!-- 默认展开错误信息 -Findyou -->
-    <button id='btn_ft1_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_4'>错误</button>
-    <div id='div_ft1_4' class="collapse in">
-    <pre>
-    
-ft1_4: Traceback (most recent call last):
-  File "D:\Coding\qaplatform\qaplatform\testcases\userlogin_101\test_login.py", line 120, in test_No1010104_login_emptyparameters
-    logger.logger.info(str(response_output_data))
-UnboundLocalError: local variable 'response_output_data' referenced before assignment
-
-
-    </pre>
-    </div>
-    </td>
+<tr id='pt1_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test_upper</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
 </tr>
 
 <tr id='total_row' class="text-center active">
     <td>总计</td>
-    <td>4</td>
+    <td>3</td>
+    <td>3</td>
     <td>0</td>
     <td>0</td>
-    <td>4</td>
-    <td>通过率：0.00%</td>
+    <td>通过率：100.00%</td>
 </tr>
 </table>
 
