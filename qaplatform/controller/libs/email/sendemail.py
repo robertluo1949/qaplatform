@@ -18,8 +18,8 @@ from qaplatform.controller.log import logger
 def find_new_file(dir):
     '''查找目录下最新的文件'''
     file_lists = os.listdir(dir)
-    file_lists.sort(key=lambda fn: os.path.getmtime(dir + "\\" + fn)
-    if not os.path.isdir(dir + "\\" + fn)
+    file_lists.sort(key=lambda fn: os.path.getmtime(dir + "/" + fn)
+    if not os.path.isdir(dir + "/" + fn)
     else 0)
     print('最新的文件为： ' + file_lists[-1])
     file = os.path.join(dir, file_lists[-1])

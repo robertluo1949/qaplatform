@@ -48,6 +48,17 @@ def indextmp():
     logger.logger.info("testing logger")
     return render_template("index.html")
 
+@app.route('/user/example')
+def example():
+    logger.logger.info("testing example")
+    return  json.dumps({
+              "additionalProp1" : 0,
+              "additionalProp2" : 0,
+              "additionalProp3" : 0
+            })
+
+
+
 @app.route('/test/example',methods=['POST','GET'])
 def testexample():
     TESTTYPE=config.REPORT_INFO[0]["type_id"]
